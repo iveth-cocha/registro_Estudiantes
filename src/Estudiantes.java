@@ -23,4 +23,8 @@ public class Estudiantes implements Serializable {
     public void setConta(String conta) {
         this.contra = contra;
     }
+
+    public void retorno(){
+        System.out.println("Bienvenido estudiante "+nombre+" has ingresado correctamente tus datos ");
+    }
 }
