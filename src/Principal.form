@@ -17,7 +17,7 @@
           <text value="Bienvenidos"/>
         </properties>
       </component>
-      <component id="60aa6" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+      <component id="60aa6" class="javax.swing.JTextField" binding="n_user">
         <constraints>
           <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -41,7 +41,7 @@
           <text value="Contraseña"/>
         </properties>
       </component>
-      <component id="34471" class="javax.swing.JPasswordField" binding="passwordField1" default-binding="true">
+      <component id="34471" class="javax.swing.JPasswordField" binding="pas_user">
         <constraints>
           <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>

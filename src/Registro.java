@@ -2,80 +2,66 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class Registro {
-    private JPanel rootPanel2;
+    public JPanel rootPanel2;
     private JTextField nom_re;
     private JPasswordField ps1;
     private JButton registrarseButton;
 
-    private ArrayList<Estudiantes>datos;
-
-
-    //get que hace posible la invocacion a esta ventana registro
-    public JPanel getRootPanel2() {
-        return rootPanel2;
-    }
-
+    JPanel rootPanel;
 
 public Registro() {
     registrarseButton.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             //---------Registrar usuario___________________
-            datos=new ArrayList();
 
-            String nombre =nom_re.getText();
-            String contra = ps1.getText();
+            Estudiantes registro = new Estudiantes();
+            String nombre = nom_re.getText();
+            registro.setNombre(nombre);
+            String contra=String.valueOf(ps1.getPassword());
+            registro.setContra(contra);
 
-            Estudiantes nuevo = new Estudiantes(nombre, contra);
-            datos.add(nuevo);
+            try{
 
-            String filePath = "Usuarios.dat";
-
-            try(
-                    FileOutputStream fileOut = new FileOutputStream(filePath);
-                    ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
-            ){
-                objOut.writeObject(nuevo);
-                System.out.println("Archivo guardado correctamente");
-            }catch (IOException ex){
-                throw new RuntimeException(ex);
+                FileOutputStream nombreR = new FileOutputStream("Usuario.dat",true);
+                ObjectOutputStream objd = new ObjectOutputStream(nombreR);
+                objd.writeObject(registro);
+                System.out.println("Registro exitoso! ");
+                nom_re.setText("");
+                ps1.setText("");
+            } catch (FileNotFoundException ex) {
+                System.out.println("NO SE ENCUENTRA EL ARCHIVO " + ex);
+            } catch (IOException ex) {
+                System.out.println("NO SE PUDO GUARDAR EL ARCHIVO" +ex);
             }
 
 
             //----------reegresar a ventana principal------------------
-            Principal v = new Principal();
 
-            JFrame frameINI= new JFrame("Página Inicial");
+            JFrame frameIni = (JFrame) SwingUtilities.getWindowAncestor(rootPanel2);
+            frameIni.setVisible(false);
 
-            frameINI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frameINI.setResizable(false);
-            frameINI.setPreferredSize(new Dimension(500,400));
-            frameINI.pack();
-            frameINI.setLocationRelativeTo(null);
-            frameINI.setVisible(true);
+            JFrame princfr= new JFrame("Página Inicial");
+            Principal vpri = new Principal();
 
-            //direcciona a mi ventana Principal
-            frameINI.setContentPane(v.getRootPanel());
+            princfr.setContentPane(vpri.rootPanel);
+            princfr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            princfr.setResizable(false);
+            princfr.setPreferredSize(new Dimension(500,400));
+            princfr.pack();
+            princfr.setLocationRelativeTo(null);
+            princfr.setVisible(true);
+
         }
     });
 }
 
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Registro");
-
-        frame.setContentPane(new Registro().rootPanel2);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setPreferredSize(new Dimension(500,400));
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }
 
 }

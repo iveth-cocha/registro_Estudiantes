@@ -8,6 +8,8 @@ public class Estudiantes implements Serializable {
         this.contra = contra;
     }
 
+
+
     public String getNombre() {
         return nombre;
     }
@@ -16,15 +18,15 @@ public class Estudiantes implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getConta() {
+    public String getContra() {
         return contra;
     }
 
-    public void setConta(String conta) {
+    public void setContra(String contra) {
         this.contra = contra;
     }
 
-    public void retorno(){
-        System.out.println("Bienvenido estudiante "+nombre+" has ingresado correctamente tus datos ");
+    public Estudiantes() {
     }
+
 }
